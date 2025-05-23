@@ -37,12 +37,12 @@ const UsersPage: React.FC = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
+      {/* <Typography variant="h4" gutterBottom>
         ユーザー一覧
       </Typography>
       {users.map(user => (
         <UserCard key={user.id} user={user} />
-      ))}
+      ))} */}
     </Box>
   );
 }
