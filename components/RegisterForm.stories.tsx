@@ -2,7 +2,7 @@
 
 // import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import RegisterForm from "./RegisterForm";
+import RegisterForm from "../app/register/RegisterForm";
 
 // TODO: メタデータ
 const meta: Meta<typeof RegisterForm> = {

@@ -1,9 +1,9 @@
 // components/RegisterForm.tsx
 
-import React from "react";
+import React,{useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
-import { createUser } from "../utils/api";
+import { createUser } from "../../utils/api";
 
 // 必要に応じて利用する
 interface RegisterFormInputs {
@@ -30,9 +30,8 @@ const RegisterForm: React.FC = () => {
     }
   };
 
-  type successType = boolean;
 
-  const [success, setSuccess] = React.useState<successType>(false);
+  const [success, setSuccess] = useState<boolean>(false);
 
   return (
     <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
