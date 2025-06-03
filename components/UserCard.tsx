@@ -2,12 +2,28 @@ import React from 'react';
 import { Card, CardContent, Typography, CardActions, Button } from '@mui/material';
 import { User } from '../types/User';
 import Link from 'next/link';
+import { deleteUser } from '../utils/api';
+// import { userAgent } from 'next/server';
 
 interface UserCardProps {
   user: User;
+  onDelete:(id:number) => void;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+
+const UserCard: React.FC<UserCardProps> = ({ user,onDelete }) => {
+const handleDelete = async () => {
+    if (!confirm(`${user.name} を削除しますか？`)) return;
+
+    try {
+      await deleteUser(user.id);
+      alert('削除しました');
+      onDelete(user.id);
+    } catch (err) {
+      alert('削除に失敗しました');
+      console.error(err);
+    }
+  };
   return (
     <Card sx={{ minWidth: 275, mb: 2 }}>
       <CardContent>
@@ -23,7 +39,7 @@ const UserCard: React.FC<UserCardProps> = ({ user }) => {
       </CardContent>
       <CardActions>
         <Button size="small" component={Link} href={`/users/${user.id}/edit`}>編集</Button>
-        <Button size="small" color="error">削除</Button>
+        <Button size="small" color="error" onClick={handleDelete}>削除</Button>
       </CardActions>
     </Card>
   );

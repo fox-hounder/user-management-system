@@ -4,6 +4,7 @@ import React,{useState} from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import { createUser } from "../../utils/api";
+import { useRouter } from "next/router";
 
 // 必要に応じて利用する
 interface RegisterFormInputs {
@@ -20,19 +21,19 @@ const RegisterForm: React.FC = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormInputs>();
-
- const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
+  
+  const [success, setSuccess] = useState<boolean>(false);
+  const router = useRouter();
+  const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
     try {
       await createUser(data);
       setSuccess(true);
+      setTimeout(() => router.push("/users"),2000);
     } catch (err) {
       alert(`${err}登録に失敗しました`);
     }
   };
-
-
-  const [success, setSuccess] = useState<boolean>(false);
-
+  
   return (
     <Box sx={{ maxWidth: 400, mx: "auto", mt: 4 }}>
       <Typography variant="h5" gutterBottom>
