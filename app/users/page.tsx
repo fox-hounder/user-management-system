@@ -35,13 +35,21 @@ const UsersPage: React.FC = () => {
     return <Alert severity="error">{error}</Alert>;
   }
 
+  const removeUserFromList = (userId: number) => {
+    setUsers(prev => prev.filter(user => user.id !== userId));
+  };
+
+
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
         ユーザー一覧
       </Typography>
       {users.map(user => (
-        <UserCard key={user.id} user={user} />
+        <UserCard 
+          key={user.id} 
+          user={user} 
+          onDelete={removeUserFromList} />
       ))}
     </Box>
   );
